@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# nextjs-swiper-demo
 
-## Getting Started
+This is a swiper demo run on next.js, intended to show how to use Swiper Element(Web components) in React.
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+Run `pnpm install` to install the dependencies.
+
+## Running commands
+
+Development mode: The webstie will be hot updated once source file is changed.
+
+```shell
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production mode: The webstie will be first built and be served on a server process.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```shell
+pnpm build
+pnpm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Difference between SSR and noSSR
 
-## Learn More
+### Run in SSR
 
-To learn more about Next.js, take a look at the following resources:
+Change `app/page.tsx` to use `Swiper` component directly
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```tsx
+export default function Home() {
+    return <Swiper />
+}
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Run in noSSR
 
-## Deploy on Vercel
+Change `app/page.tsx` to lazy import `Swiper` component with no SSR.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```tsx
+const SwiperCSRComponent = dynamic(() => import('./swiper'), { ssr: false })
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+export default function Home() {
+    return <SwiperCSRComponent />
+}
+```
+
+### Difference
+
+- The swiper component run in noSSR mode came out with no error on console.
+- The swiper component run in SSR mode came out with error on console.
+```text
+Warning: Extra attributes from the server: role,aria-label,class,style
+    at swiper-slide
+    at swiper-container
+    at Swiper
+    at Home
+```
+
+
