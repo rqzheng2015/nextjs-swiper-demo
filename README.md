@@ -48,7 +48,7 @@ export default function Home() {
 ### Difference
 
 - The swiper component run in noSSR mode came out with no error on console.
-- The swiper component run in SSR mode came out with error on console.
+- The swiper component run in SSR mode came out with error on console in dev mode, but **will not throw error** in production mode.
 ```text
 Warning: Extra attributes from the server: role,aria-label,class,style
     at swiper-slide
