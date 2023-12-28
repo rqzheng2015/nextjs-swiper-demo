@@ -1,3 +1,4 @@
+"use client";
 import {register} from 'swiper/element/bundle';
 
 register();
@@ -29,8 +30,8 @@ const Swiper = () => {
             pagination={{
                 hideOnClick: true,
             }}
-            onSwiperprogress={onProgress}
-            onSwiperslidechange={onSlideChange}
+            // onSwiperprogress={onProgress}
+            // onSwiperslidechange={onSlideChange}
         >
             <swiper-slide>Slide 1</swiper-slide>
             <swiper-slide>Slide 2</swiper-slide>
